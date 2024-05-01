@@ -1,8 +1,3 @@
 tools: github.com/drpebcak/duckdb, sys.remove
 
-Perform the task in the following order. Do not continue to the next step until the previous step is completed, and do not exit until all steps have been completed.
-
-1. Create a new database file and resuse the complete absolute path to it for the following steps.
-2. Read the schema of the file 'test.xlsx'.
-3. Based on this schema, print the email address of the person named 'One'.
-4. Delete the database file.
+What is the email address of the person with the first name 'One' from the test.xlsx file?

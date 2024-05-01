@@ -1,19 +1,32 @@
-export: read-schema, query-data, create-database-file
-description: a toolset that is able to read structured files and make queries against them in natural language
+tools: query
+description: build a query against structured data
+args: file: The complete path to the structured file to query
+args: prompt: The natural language prompt that will be transformed into a query
+context: context with $file
+
+Use the prompt provided as well as the dbFile and schema from context to build a query, and then execute that query against the db.
+Use double quotes for strings in the query.
 
 ---
-name: query-data
-description: query structured data that has already been loaded into duckdb.
+name: query
 args: query: The duckdb query to be executed
-args: dbFile: The path to the duckdb database file
+args: dbFile: The complete path to the duckdb database file
 
 #!/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/query.py
+
+---
+name: context
+description: read the schema of a structured file and load it into a duckdb database
+tools: create-database-file, read-schema, sys.find
+args: filePath: the path to the structured file
+
+Create a database file for the structured file and then load the schema of the structured file into the database using the absolute path to the structured file.
 
 ---
 name: read-schema
 description: read the schema of a structured file and load it into a duckdb database
 args: filePath: the path to the structured file
-args: dbFile: The path to the duckdb database file
+args: dbFile: The complete path to the duckdb database file
 
 #!/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/read_schema.py
 
