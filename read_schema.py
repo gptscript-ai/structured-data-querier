@@ -1,5 +1,6 @@
 import os
 import tempfile
+import time
 
 import duckdb
 
@@ -15,23 +16,44 @@ if not os.path.exists(filePath):
     print("Error, File does not exist.")
     exit(1)
 
-cursor = duckdb.connect(database=dbFile, config={'temp_directory': tempfile.gettempdir()})
+max_retries = 10
+attempts = 0
+success = False
 
-file = os.path.basename(filePath)
-file_name, file_extension = os.path.splitext(file)
-if file_extension == '.csv':
-    schema_query = f"CREATE TABLE IF NOT EXISTS {file_name} AS SELECT * FROM read_csv_auto('{filePath}');"
-elif file_extension == '.xlsx':
-    cursor.install_extension("spatial")
-    cursor.load_extension("spatial")
-    schema_query = f"CREATE TABLE IF NOT EXISTS {file_name} AS SELECT * FROM st_read('{filePath}', open_options=['HEADERS=FORCE']);"
+while not success and attempts < max_retries:
+    try:
+        cursor = duckdb.connect(database=dbFile, config={'temp_directory': tempfile.gettempdir()})
+        success = True
+    except:
+        time.sleep(1)
+        attempts += 1
+
+if success:
+    file = os.path.basename(filePath)
+    _, file_extension = os.path.splitext(file)
+    table_name = os.path.basename(dbFile)
+
+    if file_extension == '.csv':
+        load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_csv('{filePath}', escape = '\', header = true);"
+    elif file_extension == '.xlsx':
+        cursor.install_extension("spatial")
+        cursor.load_extension("spatial")
+        load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM st_read('{filePath}', open_options=['HEADERS=FORCE']);"
+    elif file_extension == '.json':
+        load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_json_auto('{filePath}');"
+    else:
+        print("Error, Unsupported file type. Please provide a .json, .csv, or .xlsx file.")
+        exit(1)
+
+    cursor.execute(load_query)
+
+    try:
+        schema_query = f"PRAGMA table_info('{table_name}');"
+        print(f"Schema for table '{table_name}':")
+        print(cursor.sql(schema_query).show(max_rows=10000000, max_width=10000000))
+    except Exception as e:
+        print(f"Failed to read schema: {e}")
+        exit(1)
 else:
-    print("Error, Unsupported file type. Please provide a .csv or .xlsx file.")
+    print("Failed to connect to database")
     exit(1)
-
-cursor.execute(schema_query)
-
-query = f"PRAGMA table_info('{file_name}');"
-print(f"Schema for table '{file_name}':")
-print(cursor.sql(query).execute())
-

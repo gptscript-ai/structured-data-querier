@@ -1,38 +1,64 @@
-tools: query
-description: build a query against structured data
+tools: read-query, write-query
+description: build a duckdb query against structured data. This tool cannot be ran in parallel with itself
 args: file: The complete path to the structured file to query
-args: prompt: The natural language prompt that will be transformed into a query
+args: prompt: The natural language prompt that will be transformed into a duckdb query. This prompt should not be written in sql.
 context: context with $file
 
+You are an expert as writing duckdb queries and doing data analysis.
+Strings in the query must be surrounded by single quote characters.
+Double quote characters must be used to denote table and column names.
+Do not use backticks to wrap strings or table/column names.
+Any '-' in the table names must be replaced with '_'.
 Use the prompt provided as well as the dbFile and schema from context to build a query, and then execute that query against the db.
-Use double quotes for strings in the query.
+All files should be referenced with an absolute path.
+Always the complete results of the query, do not truncate the results in any way.
+Do not try to create tables or load data into the database, only query the existing data.
+If an error comes back from this command, try to figure out what went wrong and inform the user.
+
 
 ---
-name: query
+name: read-query
+description: Executes a read-only query against a duckdb database
+args: query: The duckdb query to be executed
+args: dbFile: The complete path to the duckdb database file
+args: readonly: Should always be 'true'
+
+#!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/query.py
+
+---
+name: write-query
+description: Executes a query that writes to a duckdb database
 args: query: The duckdb query to be executed
 args: dbFile: The complete path to the duckdb database file
 
-#!/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/query.py
+#!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/query.py
 
 ---
 name: context
 description: read the schema of a structured file and load it into a duckdb database
-tools: create-database-file, read-schema, sys.find
+tools: create-database-file, read-schema
 args: filePath: the path to the structured file
 
-Create a database file for the structured file and then load the schema of the structured file into the database using the absolute path to the structured file.
+Do these steps one at a time, do not move on until the previous step is complete. Do not exit until all steps are finished.
+
+Create a database file for the structured file based of the name of the file being read. Replace any spaces or special characters in the name with an underscore. The database filename should only contain letters, numbers, and underscores.
+
+Next, load the schema of the structured file into the database using the absolute path to the structured file. The table should be named the same thing as the database file.
+Table names can only contain letters, numbers, and underscores.
+
+Return the complete path to the database file and the schema created.
 
 ---
 name: read-schema
-description: read the schema of a structured file and load it into a duckdb database
+description: read the schema of a structured file (json, csv, or xlsx) and load it into a duckdb database
 args: filePath: the path to the structured file
 args: dbFile: The complete path to the duckdb database file
 
-#!/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/read_schema.py
+#!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/read_schema.py
 
 ---
 name: create-database-file
-description: create a new duckdb database file if one does not exist
+description: creates a new duckdb database file if one does not exist
 args: dbFile: The name of the duckdb database file to create
 
-#!/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/create_database_file.py
+#!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/create_database_file.py
