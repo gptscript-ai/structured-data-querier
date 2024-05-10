@@ -39,10 +39,10 @@ if success:
         cursor.install_extension("spatial")
         cursor.load_extension("spatial")
         load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM st_read('{filePath}', open_options=['HEADERS=FORCE']);"
-    elif file_extension == '.json':
+    elif file_extension == '.jsonl' or file_extension == '.ndjson' or file_extension == '.json':
         load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_json_auto('{filePath}');"
     else:
-        print("Error, Unsupported file type. Please provide a .json, .csv, or .xlsx file.")
+        print("Error, Unsupported file type. Please provide a .json, .ndjson, .jsonl, .csv, or .xlsx file.")
         exit(1)
 
     cursor.execute(load_query)
