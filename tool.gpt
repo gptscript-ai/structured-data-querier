@@ -14,6 +14,7 @@ All files should be referenced with an absolute path.
 Always the complete results of the query, do not truncate the results in any way.
 Do not try to create tables or load data into the database, only query the existing data.
 Use read-query tool to execute all queries, unless the query is making changes to the database. In that case, use write-query.
+If the user tries to export data out of the database, use export-result.
 If an error comes back from this command, try to figure out what went wrong and inform the user.
 
 
