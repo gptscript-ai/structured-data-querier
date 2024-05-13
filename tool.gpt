@@ -14,7 +14,7 @@ All files should be referenced with an absolute path.
 Always the complete results of the query, do not truncate the results in any way.
 If the query is trying to modify or delete data, use `write-query`. Otherwise, use `read-query` by default.
 If the user tries to export data out of the database, use export-result.
-Do not try to create tables or load data into the database, only query the existing data.
+Do not try to load data into the database, only query the existing data.
 If an error comes back from this command, try to figure out what went wrong and inform the user.
 
 
