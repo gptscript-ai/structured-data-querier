@@ -7,10 +7,10 @@ import duckdb
 dbFile = os.getenv('DBFILE', None)
 if dbFile is None:
     print("Error, Please provide a database file.")
-    exit(1)
+    exit(0)
 if not os.path.exists(dbFile):
     print("Error, Database does not exist.")
-    exit(1)
+    exit(0)
 query = os.getenv('QUERY', None)
 readonly = os.getenv('READONLY', 'false').lower() == 'true'
 
