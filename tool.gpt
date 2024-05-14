@@ -3,7 +3,7 @@ export: export-result
 description: build a duckdb query against structured data. Also support exporting data from the duckdb database into a structured file format such as csv, json, or xlsx. This tool cannot be ran in parallel with itself
 args: file: (Optional) The complete path to the structured file to query
 args: prompt: The natural language prompt that will be transformed into a duckdb query. This prompt should not be written in sql.
-context: github.com/gptscript-ai/structured-data-querier/tool-context.txt
+context: github.com/drpebcak/structured-data-querier/tool-context.txt
 
 If it has not already been done, load the provided file into a duckdb database. If no file is provided, assume the user is trying to query a duckdb database you have already created.
 
@@ -62,7 +62,7 @@ args: dbFile: The name of the duckdb database file to create
 ---
 name: export-result
 tools: read-query, pwd
-context: github.com/gptscript-ai/structured-data-querier/export-context.txt
+context: github.com/drpebcak/structured-data-querier/export-context.txt
 description: creates duckdb queries that writes the contents of a database to a structured file
 args: prompt: The natural language prompt that will be transformed into a duckdb query to write a file. This prompt should not be written in sql.
 args: dbFile: The complete absolute path to the existing duckdb database file
