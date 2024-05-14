@@ -9,6 +9,7 @@ If it has not already been done, load the provided file into a duckdb database b
 
 ---
 name: load-data
+description: takes a file and uses context tool to load it into a duckdb database. returns the path to the database file as well as the table name and schema information
 args: file: The complete path to the structured file to query
 context: context with $file
 
