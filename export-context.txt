@@ -1,5 +1,6 @@
 # Documentation for exporting data from duckdb
 This document describes how to export data from DuckDB to CSV, Excel, and JSON files, with example queries.
+Takes data from a duckdb database table and writes a structured file with the contents.
 
 # CSV Export
 To export the data from a table to a CSV file, use the COPY statement.
