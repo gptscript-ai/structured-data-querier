@@ -67,7 +67,7 @@ args: dbFile: The name of the duckdb database file to create
 
 ---
 name: export-result
-tools: read-query
+tools: read-query, pwd
 context: github.com/gptscript-ai/structured-data-querier/export-context.txt
 description: creates duckdb queries that writes the contents of a database to a structured file
 args: prompt: The natural language prompt that will be transformed into a duckdb query to write a file. This prompt should not be written in sql.
@@ -75,3 +75,9 @@ args: dbFile: The complete absolute path to the existing duckdb database file
 args: filePath: The path to the structured file to write the results to
 
 Write a duckdb query based on the prompt provided that will dump the contents of the database to a structured file in the specified format. The files it writes should always be written to the user's current working directory.
+
+---
+name: pwd
+description: returns the absolute path for the user's current working directory
+
+#!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/pwd.py
