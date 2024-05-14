@@ -1,4 +1,5 @@
-tools: read-query, write-query, export-result
+tools: read-query, write-query
+export: export-result
 description: build a duckdb query against structured data. Also support exporting data from the duckdb database into a structured file format such as csv, json, or xlsx. This tool cannot be ran in parallel with itself
 args: file: The complete path to the structured file to query
 args: prompt: The natural language prompt that will be transformed into a duckdb query. This prompt should not be written in sql.
@@ -13,7 +14,6 @@ Use the prompt provided as well as the dbFile and schema from context to build a
 All files should be referenced with an absolute path.
 Always the complete results of the query, do not truncate the results in any way.
 If the query is trying to modify or delete data, use `write-query`. Otherwise, use `read-query` by default.
-If the user tries to export or write data out of the database, use `export-result`.
 Do not try to load data into the database, only query the existing data.
 If an error comes back from this command, try to figure out what went wrong and inform the user.
 
@@ -31,7 +31,7 @@ args: readonly: Should always be 'true'
 name: write-query
 description: Executes a query that writes to a duckdb database. This tool should be used whenever the database is going to be changed.
 args: query: The duckdb query to be executed
-args: dbFile: The complete path to the duckdb database file
+args: dbFile: The complete absolute path to the duckdb database file
 
 #!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/query.py
 
@@ -72,6 +72,6 @@ context: github.com/gptscript-ai/structured-data-querier/export-context.txt
 description: creates duckdb queries that writes the contents of a database to a structured file
 args: prompt: The natural language prompt that will be transformed into a duckdb query to write a file. This prompt should not be written in sql.
 args: dbFile: The complete absolute path to the duckdb database file
-args: fileName: The name of the structured file to write the results to
+args: filePath: The path to the structured file to write the results to
 
 Write a duckdb query based on the prompt provided that will dump the contents of the database to a structured file in the specified format. The files it writes should always be written to the user's current working directory.
