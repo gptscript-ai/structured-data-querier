@@ -40,8 +40,8 @@ if success:
             exit(0)
 
     else:
-        print("No query specified")
-        exit(1)
+        print("Error: No query specified, please provide a query.")
+        exit(0)
 else:
-    print("Failed to connect to database")
-    exit(1)
+    print("Error: Failed to connect to database. Did you supply the correct database file?")
+    exit(0)
