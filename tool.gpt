@@ -5,7 +5,7 @@ args: file: (Optional) The complete path to the structured file to query
 args: prompt: The natural language prompt that will be transformed into a duckdb query. This prompt should not be written in sql.
 context: github.com/drpebcak/structured-data-querier/tool-context.txt
 
-If it has not already been done, load the provided file into a duckdb database. If no file is provided, assume the user is trying to query a duckdb database you have already created.
+If it has not already been done, load the provided file into a duckdb database before attempting to do any queries. If no file is provided, assume the user is trying to query a duckdb database you have already created.
 
 ---
 name: load-data
