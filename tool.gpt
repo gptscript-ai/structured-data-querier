@@ -68,6 +68,7 @@ args: dbFile: The name of the duckdb database file to create
 ---
 name: export-result
 tools: read-query
+context: github.com/gptscript-ai/structured-data-querier/export-context.txt
 description: creates duckdb queries that writes the contents of a database to a structured file
 args: prompt: The natural language prompt that will be transformed into a duckdb query to write a file. This prompt should not be written in sql.
 args: dbFile: The complete path to the duckdb database file

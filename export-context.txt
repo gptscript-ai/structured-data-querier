@@ -1,0 +1,30 @@
+# CSV Export
+To export the data from a table to a CSV file, use the COPY statement.
+
+```
+COPY tbl TO 'output.csv' (HEADER, DELIMITER ',');
+```
+
+# Excel Export
+To export the data from a table to an Excel file, install and load the spatial extension. This is only needed once per DuckDB connection.
+
+```
+INSTALL spatial;
+LOAD spatial;
+```
+
+Then use the COPY statement. The file will contain one worksheet with the same name as the file, but without the .xlsx extension.
+### Note
+Dates and timestamps are currently not supported by the xlsx writer. Cast columns of those types to VARCHAR prior to creating the xlsx file.
+
+```
+COPY tbl TO 'output.xlsx' WITH (FORMAT GDAL, DRIVER 'xlsx');
+```
+
+# JSON Export
+
+To export the data from a table to a JSON file, use the COPY statement.
+
+```
+COPY tbl TO 'output.json';
+```
