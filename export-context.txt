@@ -5,7 +5,7 @@ This document describes how to export data from DuckDB to CSV, Excel, and JSON f
 To export the data from a table to a CSV file, use the COPY statement.
 
 ```
-COPY {table} TO '{filename}' (HEADER, DELIMITER ',');
+COPY {table} TO '{./filename}' (HEADER, DELIMITER ',');
 ```
 
 # Excel Export
@@ -21,7 +21,7 @@ Then use the COPY statement. The file will contain one worksheet with the same n
 Dates and timestamps are currently not supported by the xlsx writer. Cast columns of those types to VARCHAR prior to creating the xlsx file.
 
 ```
-COPY {table} TO '{filename}' WITH (FORMAT GDAL, DRIVER 'xlsx');
+COPY {table} TO './{filename}' WITH (FORMAT GDAL, DRIVER 'xlsx');
 ```
 
 # JSON Export
@@ -29,5 +29,5 @@ COPY {table} TO '{filename}' WITH (FORMAT GDAL, DRIVER 'xlsx');
 To export the data from a table to a JSON file, use the COPY statement.
 
 ```
-COPY {table} TO '{filename}';
+COPY {table} TO './{filename}';
 ```
