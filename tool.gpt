@@ -13,7 +13,7 @@ Use the prompt provided as well as the dbFile and schema from context to build a
 All files should be referenced with an absolute path.
 Always the complete results of the query, do not truncate the results in any way.
 If the query is trying to modify or delete data, use `write-query`. Otherwise, use `read-query` by default.
-If the user tries to export data out of the database, use export-result.
+If the user tries to export or write data out of the database, use export-result.
 Do not try to load data into the database, only query the existing data.
 If an error comes back from this command, try to figure out what went wrong and inform the user.
 
@@ -68,10 +68,10 @@ args: dbFile: The name of the duckdb database file to create
 
 ---
 name: export-result
-tools: write-query
+tools: read-query
 description: writes duckdb queries that dump the contents of a database to a structured file
 args: prompt: The natural language prompt that will be transformed into a duckdb query to write a file. This prompt should not be written in sql.
 args: dbFile: The complete path to the duckdb database file
 args: destinationFile: The complete path to the structured file to write the results to
 
-Write a duckdb query based on the prompt provided that will dump the contents of the database to a structured file.
+Write a duckdb query based on the prompt provided that will dump the contents of the database to a structured file in the specified format.

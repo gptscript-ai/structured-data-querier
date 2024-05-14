@@ -34,13 +34,13 @@ if success:
     table_name = os.path.basename(dbFile)
 
     if file_extension == '.csv':
-        load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_csv('{filePath}', escape = '\', header = true);"
+        load_query = f"CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_csv('{filePath}', escape = '\', header = true);"
     elif file_extension == '.xlsx':
         cursor.install_extension("spatial")
         cursor.load_extension("spatial")
-        load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM st_read('{filePath}', open_options=['HEADERS=FORCE']);"
+        load_query = f"CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM st_read('{filePath}', open_options=['HEADERS=FORCE']);"
     elif file_extension == '.jsonl' or file_extension == '.ndjson' or file_extension == '.json':
-        load_query = f"DROP TABLE IF EXISTS {table_name}; CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_json_auto('{filePath}');"
+        load_query = f"CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_json_auto('{filePath}');"
     else:
         print("Error, Unsupported file type. Please provide a .json, .ndjson, .jsonl, .csv, or .xlsx file.")
         exit(1)
