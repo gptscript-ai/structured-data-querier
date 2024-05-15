@@ -18,6 +18,8 @@ max_retries = 10
 attempts = 0
 success = False
 
+dbFile = os.environ['GPTSCRIPT_WORKSPACE_DIR'] + '/' + dbFile
+
 while not success and attempts < max_retries:
         try:
             cursor = duckdb.connect(database=dbFile, read_only=readonly, config={'temp_directory': tempfile.gettempdir()})

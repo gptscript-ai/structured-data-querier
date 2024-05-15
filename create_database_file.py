@@ -1,9 +1,8 @@
 import os
-import tempfile
 
 import duckdb
 
-dbFile = tempfile.gettempdir() + '/' + os.environ['DBFILE']
+dbFile = os.environ['GPTSCRIPT_WORKSPACE_DIR'] + '/' + os.environ['DBFILE']
 
 if dbFile is None:
     print("Error, Please provide a database file.")
