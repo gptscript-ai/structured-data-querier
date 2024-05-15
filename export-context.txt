@@ -6,7 +6,7 @@ Takes data from a duckdb database table and writes a structured file with the co
 To export the data from a table to a CSV file, use the COPY statement.
 
 ```
-COPY {table} TO '{filePath}' (HEADER, DELIMITER ',');
+COPY {table} TO '{GPTSCRIPT_WORKSPACE_DIR}/{file}' (HEADER, DELIMITER ',');
 ```
 
 # Excel Export
@@ -22,7 +22,7 @@ Then use the COPY statement. The file will contain one worksheet with the same n
 Dates and timestamps are currently not supported by the xlsx writer. Cast columns of those types to VARCHAR prior to creating the xlsx file.
 
 ```
-COPY {table} TO './{filePath}' WITH (FORMAT GDAL, DRIVER 'xlsx');
+COPY {table} TO '{GPTSCRIPT_WORKSPACE_DIR}/{file}' WITH (FORMAT GDAL, DRIVER 'xlsx');
 ```
 
 # JSON Export
@@ -30,5 +30,5 @@ COPY {table} TO './{filePath}' WITH (FORMAT GDAL, DRIVER 'xlsx');
 To export the data from a table to a JSON file, use the COPY statement.
 
 ```
-COPY {table} TO './{filePath}';
+COPY {table} TO '{GPTSCRIPT_WORKSPACE_DIR}/{file}';
 ```

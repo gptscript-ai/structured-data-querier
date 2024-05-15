@@ -68,7 +68,7 @@ context: github.com/drpebcak/structured-data-querier/export-context.txt
 description: creates duckdb queries that writes the contents of a database to a structured file
 args: prompt: The natural language prompt that will be transformed into a duckdb query to write a file. This prompt should not be written in sql.
 args: dbFile: The filename of the existing duckdb database
-args: filePath: The path to the structured file to write the results to
+args: file: The name of the structured file to write the results to
 
 Write a duckdb query based on the prompt provided that will dump the contents of the database to a structured file in the specified format. The files it writes should always be written to the user's current working directory.
 
