@@ -3,7 +3,7 @@ export: export-result
 description: build a duckdb query against structured data. Also support exporting data from the duckdb database into a structured file format such as csv, json, or xlsx. This tool cannot be ran in parallel with itself
 args: file: (Optional) The complete path to the structured file to query
 args: prompt: The natural language prompt that will be transformed into a duckdb query. This prompt should not be written in sql.
-context: github.com/drpebcak/structured-data-querier/tool-context.txt
+context: github.com/drpebcak/structured-data-querier/query-context.txt
 
 If it has not already been done, load the provided file into a duckdb database before attempting to do any queries. If no file is provided, assume the user is trying to query a duckdb database you have already created.
 
