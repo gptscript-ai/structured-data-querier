@@ -13,7 +13,7 @@ When no file is provided, assume the user is trying to query a pre-existing duck
 ---
 name: load-data
 description: takes a file and uses context tool to load it into a duckdb database. returns the path to the database file as well as the table name and schema information
-args: file: The complete path to the structured file to query
+args: file: The filename of the structured file to load into duckdb
 context: context with $file
 
 Return the created database filename, table name, and schema information.
@@ -40,7 +40,7 @@ name: context
 description: read the schema of a structured file and load it into a duckdb database
 context: github.com/drpebcak/structured-data-querier/naming-conventions.txt
 tools: create-database-file, read-schema
-args: filePath: the path to the structured file
+args: file: the filename of the structured file to read
 
 Do these steps one at a time, do not move on until the previous step is complete. Do not exit until all steps are finished.
 
@@ -52,7 +52,7 @@ Return the name of the database file, table, and the schema created.
 ---
 name: read-schema
 description: read the schema of a structured file (json, csv, or xlsx) and load it into a duckdb database
-args: filePath: the path to the structured file
+args: file: the filename of the structured file to read
 args: dbFile: The filename of the existing duckdb database
 
 #!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/read_schema.py
