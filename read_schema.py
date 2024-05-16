@@ -34,6 +34,7 @@ if success:
     file = os.path.basename(file)
     _, file_extension = os.path.splitext(file)
     table_name = os.path.basename(dbFile)
+    table_name, _ = os.path.splitext(table_name)
 
     if file_extension == '.csv':
         load_query = f"CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM read_csv('{file}', escape = '\', header = true);"
