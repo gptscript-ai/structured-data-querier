@@ -22,7 +22,7 @@ Return the created database filename, table name, and schema information.
 name: read-query
 description: Executes a read-only query against a duckdb database
 args: query: The duckdb query to be executed
-args: dbFile: The filename of the existing duckdb database
+args: dbFile: The filename of the existing duckdb database. This must have a .duckdb extension
 args: readonly: Should always be 'true'
 
 #!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/query.py
@@ -31,7 +31,7 @@ args: readonly: Should always be 'true'
 name: write-query
 description: Executes a query that writes to a duckdb database. This tool should be used whenever the database is going to be changed.
 args: query: The duckdb query to be executed
-args: dbFile: The filename of the existing duckdb database
+args: dbFile: The filename of the existing duckdb database. This must have a .duckdb extension
 
 #!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/query.py
 
