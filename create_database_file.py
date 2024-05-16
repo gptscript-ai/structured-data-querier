@@ -9,6 +9,6 @@ if dbFile is None:
     exit(1)
 if not os.path.exists(dbFile):
     duckdb.connect(database=dbFile)
-    print("The database has been created at " + dbFile + ".")
+    print("Success, The database has been created at " + dbFile + ".")
 else:
-    print("The database already exists at " + dbFile + ".")
+    print("Success, The database already exists at " + dbFile + ".")
