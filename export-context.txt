@@ -2,14 +2,14 @@
 This document describes how to export data from DuckDB to CSV, Excel, and JSON files, with example queries.
 Takes data from a duckdb database table and writes a structured file with the contents.
 
-# CSV Export
+## CSV Export (.csv extension)
 To export the data from a table to a CSV file, use the COPY statement.
 
 ```
 COPY {table} TO '{GPTSCRIPT_WORKSPACE_DIR}/{file}' (HEADER, DELIMITER ',');
 ```
 
-# Excel Export
+## Excel Export (.xlsx extension)
 To export the data from a table to an Excel file, install and load the spatial extension. This is only needed once per DuckDB connection.
 
 ```
@@ -25,7 +25,7 @@ Dates and timestamps are currently not supported by the xlsx writer. Cast column
 COPY {table} TO '{GPTSCRIPT_WORKSPACE_DIR}/{file}' WITH (FORMAT GDAL, DRIVER 'xlsx');
 ```
 
-# JSON Export
+## JSON Export (.json extension)
 
 To export the data from a table to a JSON file, use the COPY statement.
 
