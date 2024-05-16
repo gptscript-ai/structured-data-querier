@@ -44,8 +44,7 @@ args: filePath: the path to the structured file
 
 Do these steps one at a time, do not move on until the previous step is complete. Do not exit until all steps are finished.
 
-Create a database file for the structured file based of the name of the file being read. Replace any spaces or special characters in the name with an underscore. The database filename should only contain letters, numbers, and underscores.
-
+Create a database file for the structured file based of the name of the file being read.
 Next, load the schema of the structured file into the database.
 
 Return the name of the database file, table, and the schema created.
