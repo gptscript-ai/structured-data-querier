@@ -1,7 +1,7 @@
 # Database filename conventions
-The database file should have the same name as the structured file, but with a .duckdb extension instead. For example, if the structured file is named 'data.csv', the database file should be named 'data.duckdb'.
+The database file should have the same name as the structured file, but with a .duckdb extension instead. For example, if the structured file is named 'data.csv', the database file should be named 'data.duckdb'. Database filenames can only contain letters, numbers, and underscores.
 If the structured file has any special characters or spaces in its name, those should be replaced by underscores in the database file name. For example, if the structured file is named 'my data.csv', the database file should be named 'my_data.duckdb'.
 
 # Table naming conventions
-The table should have the same name as the structured file without the file extension. For example, if the structured file is named 'data.csv', the database table should be named 'data'.
+The table should have the same name as the structured file without the file extension. For example, if the structured file is named 'data.csv', the database table should be named 'data'. Table names can only contain letters, numbers, and underscores.
 If the structured file has any special characters or spaces in its name, those should be replaced by underscores in the table name. For example, if the structured file is named 'my data.csv' or 'my-data.csv', the table should be named 'my_data'.

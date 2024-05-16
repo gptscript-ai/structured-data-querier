@@ -14,7 +14,6 @@ When no file is provided, assume the user is trying to query a pre-existing duck
 name: load-data
 description: takes a file and uses context tool to load it into a duckdb database. returns the path to the database file as well as the table name and schema information
 args: file: The complete path to the structured file to query
-context: github.com/drpebcak/structured-data-querier/naming-conventions.txt
 context: context with $file
 
 Return the created database filename, table name, and schema information.
@@ -39,6 +38,7 @@ args: dbFile: The filename of the existing duckdb database
 ---
 name: context
 description: read the schema of a structured file and load it into a duckdb database
+context: github.com/drpebcak/structured-data-querier/naming-conventions.txt
 tools: create-database-file, read-schema
 args: filePath: the path to the structured file
 
@@ -46,10 +46,9 @@ Do these steps one at a time, do not move on until the previous step is complete
 
 Create a database file for the structured file based of the name of the file being read. Replace any spaces or special characters in the name with an underscore. The database filename should only contain letters, numbers, and underscores.
 
-Next, load the schema of the structured file into the database using the absolute path to the structured file. The table should be named the same thing as the database file.
-Table names can only contain letters, numbers, and underscores.
+Next, load the schema of the structured file into the database.
 
-Return the complete path to the database file and the schema created.
+Return the name of the database file, table, and the schema created.
 
 ---
 name: read-schema
