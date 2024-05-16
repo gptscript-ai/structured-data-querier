@@ -68,6 +68,7 @@ args: dbFile: The filename of the duckdb database to create
 name: export-result
 tools: read-query, pwd
 context: github.com/drpebcak/structured-data-querier/export-context.txt
+context: github.com/drpebcak/structured-data-querier/naming-conventions.txt
 description: creates duckdb queries that writes the contents of a database to a structured file
 args: prompt: The natural language prompt that will be transformed into a duckdb query to write a file. This prompt should not be written in sql.
 args: dbFile: The filename of the existing duckdb database
