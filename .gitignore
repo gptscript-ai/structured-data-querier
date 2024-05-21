@@ -2,4 +2,7 @@
 .idea
 *.csv
 *.xlsx
+*.json
 *.duckdb*
+test/*
+example.gpt
