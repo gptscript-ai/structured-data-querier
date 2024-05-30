@@ -8,7 +8,8 @@ dbFile = os.getenv('DBFILE', None)
 if dbFile is None:
     print("Error, Please provide a database file.")
     exit(0)
-dbFile = os.environ['GPTSCRIPT_WORKSPACE_DIR'] + '/' + dbFile
+if not os.path.isabs(dbFile):
+    dbFile = os.environ['GPTSCRIPT_WORKSPACE_DIR'] + '/' + dbFile
 if not os.path.exists(dbFile):
     print("Error, Database does not exist.")
     exit(0)

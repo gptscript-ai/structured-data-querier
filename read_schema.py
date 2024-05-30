@@ -16,7 +16,8 @@ if not os.path.exists(file):
     print("Error, File does not exist.")
     exit(1)
 
-dbFile = os.environ['GPTSCRIPT_WORKSPACE_DIR'] + '/' + dbFile
+if not os.path.isabs(dbFile):
+    dbFile = os.environ['GPTSCRIPT_WORKSPACE_DIR'] + '/' + dbFile
 
 max_retries = 10
 attempts = 0
