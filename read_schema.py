@@ -12,6 +12,14 @@ file = os.getenv('FILE', None)
 if file is None:
     print("Error, Please provide a file.")
     exit(1)
+if not os.path.isabs(file):
+    workspace_file = os.environ['GPTSCRIPT_WORKSPACE_DIR'] + '/' + file
+    if os.path.exists(workspace_file):
+        file = workspace_file
+    else:
+        pwd_file = os.getcwd() + '/' + file
+        if os.path.exists(pwd_file):
+            file = pwd_file
 if not os.path.exists(file):
     print("Error, File does not exist.")
     exit(1)
