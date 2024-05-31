@@ -40,8 +40,8 @@ while not success and attempts < max_retries:
         attempts += 1
 
 if success:
-    file = os.path.basename(file)
-    _, file_extension = os.path.splitext(file)
+    filename = os.path.basename(file)
+    _, file_extension = os.path.splitext(filename)
     table_name = os.path.basename(dbFile)
     table_name, _ = os.path.splitext(table_name)
 
